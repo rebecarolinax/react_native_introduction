@@ -14,8 +14,6 @@ export default function App() {
         source={require('./src/assets/userProfile.png')}
       />
 
-
-
       <Text style={styles.label}>
         Email
       </Text>
@@ -41,12 +39,6 @@ export default function App() {
     </View>
   );
 }
-
-// const [fonts, loadFonts] = useFonts({
-//   Roboto: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap',
-// });
-
-
 
 const styles = StyleSheet.create({
   container: {
