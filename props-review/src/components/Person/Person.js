@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '500',
         color: 'white',
-        textTransform: 'uppercase'
+        textTransform: 'uppercase',
+        fontFamily: 'Cairo_700Bold'
     }
 })
 
