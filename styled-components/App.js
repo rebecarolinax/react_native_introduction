@@ -1,16 +1,12 @@
 import { useState } from 'react';
-import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useFonts, Poppins_500Medium } from '@expo-google-fonts/poppins';
+import { Image, StatusBar, StyleSheet } from 'react-native';
+import { Container } from './src/components/Container/Container';
+import { useFonts, DancingScript_400Regular } from '@expo-google-fonts/dancing-script';
+import { Title, TitleBtn, TitleCount } from './src/components/Title/Title'
+import { BtnDecrement, BtnIncrement } from './src/components/Button/Button'
+import { Poppins_900Black, Poppins_600SemiBold_Italic, Poppins_100Thin, Poppins_700Bold } from '@expo-google-fonts/poppins'
 
 export default function App() {
-
-  // // para import das fonts
-  // let [fontsLoaded, fontError] = useFonts({
-  //   Poppins_500Medium
-  // });
-  // if (!fontsLoaded && !fontError) {
-  //   return null;
-  // }
 
   // hook
   const [count, setCount] = useState(0);
@@ -25,73 +21,45 @@ export default function App() {
     setCount(count - 1)
   }
 
-  //effect
-  // useEffect(() => {
-  //   console.warn(`Contador atualizado: ${count}`)
-  // }, [count])
+  let [fontsLoaded, fontError] = useFonts({
+    DancingScript_400Regular,
+    Poppins_900Black,
+    Poppins_600SemiBold_Italic,
+    Poppins_100Thin,
+    Poppins_700Bold
+  });
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
 
   return (
-    <View style={styles.container}>
+    <Container>
+
       <Image style={styles.clock}
         source={require('./src/assets/image/clock.png')}
       />
 
-      <Text style={styles.txt}>Contador:</Text>
-      <Text style={styles.count}>{count}</Text>
+      <Title>Contador:</Title>
+      <TitleCount>{count}</TitleCount>
 
+      <BtnIncrement onPress={increment}>
+        <TitleBtn>Incrementar</TitleBtn>
+      </BtnIncrement>
 
-
-      <TouchableOpacity onPress={increment} style={styles.btn}>
-        <Text style={styles.txtBtn}>Incrementar</Text>
-      </TouchableOpacity>
-
-
-      <TouchableOpacity onPress={decrement} style={styles.btn_}>
-        <Text style={styles.txtBtn}>Decrementar</Text>
-      </TouchableOpacity>
+      <BtnDecrement onPress={decrement}>
+        <TitleBtn>Decrementar</TitleBtn>
+      </BtnDecrement>
 
       <StatusBar style="auto" />
-    </View>
+
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 40
-  },
-  txt: {
-    fontFamily: 'Poppins_500Medium',
-    textTransform: 'uppercase'
-  },
-  btn: {
-    width: '80%',
-    height: 50,
-    borderRadius: 10,
-    backgroundColor: 'blue',
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  btn_: {
-    width: '80%',
-    height: 50,
-    borderRadius: 10,
-    backgroundColor: 'red',
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  txtBtn: {
-    color: 'white',
-    fontFamily: 'Poppins_500Medium',
-    textTransform: 'uppercase'
-  },
-
   clock: {
     width: 300,
     height: 300,
-
-  }
+  },
 });
