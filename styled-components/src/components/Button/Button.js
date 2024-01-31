@@ -7,6 +7,7 @@ export const BtnIncrement = styled.TouchableOpacity`
     align-items: center;
     justify-content: center;
     border-radius: 10px;
+    border: solid 3px white;
 `
 
 export const BtnDecrement = styled(BtnIncrement)`

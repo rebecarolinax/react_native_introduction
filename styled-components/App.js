@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Image, StatusBar, StyleSheet } from 'react-native';
+import { Alert, Image, StatusBar, StyleSheet } from 'react-native';
 import { Container } from './src/components/Container/Container';
 import { useFonts, DancingScript_400Regular } from '@expo-google-fonts/dancing-script';
 import { Title, TitleBtn, TitleCount } from './src/components/Title/Title'
@@ -18,7 +18,13 @@ export default function App() {
 
   // função para decrementar 
   const decrement = () => {
-    setCount(count - 1)
+    if (count > 0) {
+      setCount(count - 1)
+    }
+    else {
+      Alert.alert('Impossível decrementar!')
+    }
+
   }
 
   let [fontsLoaded, fontError] = useFonts({
