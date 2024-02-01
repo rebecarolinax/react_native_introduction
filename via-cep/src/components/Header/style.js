@@ -10,6 +10,12 @@ export const HeaderContainer = styled.View`
     /* circuferências das bordas (apenas as inferiores) */
     border-radius: 0 0 20px 20px;
     
+    /* sombras */
+    shadow-color: #000;
+    shadow-offset: 0px 2px;
+    shadow-opacity: 0.2;
+    shadow-radius: 4px;
+    
     /* elevação das sombras */
     elevation: 10;
 
@@ -19,10 +25,11 @@ export const HeaderContainer = styled.View`
 `
 
 export const HeaderContent = styled.SafeAreaView`
+
 `
 
 export const TextHeader = styled.Text`
     color: #333E33;
     font-size: 20px;
-    font-family: "Roboto_500Medium";
+    font-family: "Roboto_700Bold";
 `

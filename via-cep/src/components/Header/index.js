@@ -8,7 +8,7 @@ export function Header() {
                 {/* SafeAreaView */}
                 <TextHeader>
                     {/* título */}
-                    Consumo de API ViaCep
+                    Consumo da API ViaCep
                 </TextHeader>
             </HeaderContent>
         </HeaderContainer>
