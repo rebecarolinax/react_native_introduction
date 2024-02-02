@@ -20,13 +20,11 @@ export default function App() {
   return (
     // componentes na raiz do projeto (app.js)
     <Container>
-      <StatusBar
-        // como os elementos da barra de notificações
-        backgroundColor="#FECC2B"
-        barStyle="dark-content"
-      />
+      {/* como os elementos da barra de notificações */}
+      <StatusBar backgroundColor="#FECC2B" barStyle="dark-content" />
+      {/* header já estilizado */}
       <Header />
-
+      {/* home estilizada */}
       <Home />
     </Container>
   );

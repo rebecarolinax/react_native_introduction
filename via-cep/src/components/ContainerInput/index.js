@@ -7,10 +7,10 @@ export const ContainerInput = ({
     editable = false,
     textLabel,
     placeholder,
-    fieldValue = null,
+    value = null,
     onChangeText = null,
     keyboardType = 'default',
-    maxLength
+    maxLength = 9
 }) => {
     return (
         <FieldContent fieldWidth={fieldWidth}>
@@ -21,7 +21,7 @@ export const ContainerInput = ({
                 placeholder={placeholder}
                 keyboardType={keyboardType}
                 maxLength={maxLength}
-                value={fieldValue}
+                value={value}
                 onChangeText={onChangeText}
             />
         </FieldContent>
