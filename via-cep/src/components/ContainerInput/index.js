@@ -12,10 +12,10 @@ export const ContainerInput = ({
     keyboardType = 'default',
     maxLength = 9
 }) => {
+
     return (
         <FieldContent fieldWidth={fieldWidth}>
             <Label textLabel={textLabel} />
-
             <Input
                 editable={editable}
                 placeholder={placeholder}

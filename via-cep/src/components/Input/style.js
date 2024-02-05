@@ -9,7 +9,6 @@ export const InputText = styled.TextInput`
     border-radius: 10px;
     font-size: 18px;
     font-family: 'Roboto_500Medium';
-
     ${props => !props.editable && css`
     background-color: #f6f6f6;`}
 `
