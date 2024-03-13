@@ -1,11 +1,14 @@
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 
 import {
   requestForegroundPermissionsAsync, //solicito a permissão de localização
-  getCurrentPositionAsync // captura a localização atual
+  getCurrentPositionAsync, // captura a localização atual
+
+  watchPositionAsync, // captura em tempos a localização
+  LocationAccuracy // precisão de captura
 
 } from 'expo-location'
 
@@ -15,7 +18,15 @@ import { mapsKey } from './utils/MapsKey';
 
 
 export default function App() {
+  const mapReference = useRef(null);
+
   const [initialPosition, setInitialPosition] = useState(null);
+  const [finalPosition, setFinalPosition] = useState(
+    {
+      latitude: -23.6700,
+      longitude: -46.4486
+    }
+  )
 
   async function captureLocation() {
     const { granted } = await requestForegroundPermissionsAsync();
@@ -25,15 +36,55 @@ export default function App() {
       setInitialPosition(currentPosition);
     }
   }
+  async function MapReloadView() {
+    if (mapReference.current && initialPosition) {
+      await mapReference.current.fitToCoordinates(
+        [
+          {
+            latitude: initialPosition.coords.latitude,
+            longitude: initialPosition.coords.longitude
+          },
+          {
+            latitude: finalPosition.latitude,
+            longitude: finalPosition.longitude
+          }
+        ],
+        {
+          edgePadding: { top: 60, right: 60, bottom: 60, left: 60 },
+          animated: true
+        }
+
+      )
+    }
+  }
 
   useEffect(() => {
-    captureLocation();
-  }, []);
+    captureLocation()
+
+    // captura a localização em tempo real
+    watchPositionAsync({
+      accuracy: LocationAccuracy.High,
+      timeInterval: 1000,
+      distanceInterval: 1
+    }, async (response) => {
+      setInitialPosition(response)
+
+      mapReference.current?.animatedCamera({
+        pitch: 60,
+        center: response.coords
+      })
+    })
+  }, [1000]);
+
+  useEffect(() => {
+    MapReloadView();
+  }, [initialPosition]);
 
   return (
     <View style={styles.container}>
       {initialPosition !== null ? (
         <MapView
+          ref={mapReference}
           provider={PROVIDER_GOOGLE}
           style={styles.map}
           customMapStyle={grayMapStyle}
